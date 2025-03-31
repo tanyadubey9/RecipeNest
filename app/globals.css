@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+.cover-pic{
+  background-image: url('/dish3.png');
+  min-height: "700px";
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.typewriter {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3s steps(30) 1s 1 normal both;
+}
+.typewriter2 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3s steps(30) 4s 1 normal both;
+}
