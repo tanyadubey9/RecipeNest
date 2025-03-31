@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -16,7 +17,7 @@ const ProfilePage = () => {
   const [recipes, setRecipes] = useState([]);
 
   // Consolidate the data fetching into a single useEffect
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!session || !params?.username) return;
 
     try {
@@ -33,21 +34,14 @@ const ProfilePage = () => {
       if (!resPosts.ok) throw new Error("Failed to fetch posts");
       const dataPosts = await resPosts.json();
       setRecipes(dataPosts);
-
-      // // Fetch saved recipes only if logged in
-      // if (session.user.username === params.username) {
-      //   const resSaved = await fetch(`/api/user/${session.user.username}?saved=true`);
-      //   const dataSaved = await resSaved.json();
-      //   setRecipes(dataSaved.savedRecipes);
-      // }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [params.username, session])
 
   useEffect(() => {
     fetchData();
-  }, [params.username, session]); // ✅ Added dependency array
+}, [fetchData]);
 
   const handleSave = async () => {
     setSaving(true);

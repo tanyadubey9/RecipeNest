@@ -59,7 +59,7 @@ export default function Home() {
           <div className="flex justify-around items-center md:p-4 p-2 border-b-2 border-[#2c1402] my-5 md:max-h-[70vh] max-h-[55vh] md:min-h-96 min-h-72 gap-1">
             <div className="w-3/5 md:p-3 p-1 md:my-3 my-1">
               <h4 className="md:text-xl text-sm bg-[#e3c7ab] text-[#2b1201] font-bold">• Save Favorite Recipes</h4>
-              <p className="md:text-lg text-xs my-2 font-semibold text-[#dbdad8]">Found a recipe you love? With our Save Recipe feature, you can easily bookmark your favorite dishes and access them anytime. No need to search again—just save and revisit whenever you're ready to cook! Start building your personal recipe collection today.</p>
+              <p className="md:text-lg text-xs my-2 font-semibold text-[#dbdad8]">Found a recipe you love? With our Save Recipe feature, you can easily bookmark your favorite dishes and access them anytime. No need to search again—just save and revisit whenever you&apos;re ready to cook! Start building your personal recipe collection today.</p>
             </div>
             <Image src="/dish4.png" alt="dish1" width={180} height={180} className="md:w-[18rem] border border-[#9a725d] rounded-xl" />
           </div>

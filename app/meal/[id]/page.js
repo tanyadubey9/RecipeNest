@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react"; // Assuming you're using next-auth
+import Image from "next/image";
 
 const MealDetail = () => {
   const { data: session } = useSession(); // Get user session
@@ -55,7 +56,7 @@ const MealDetail = () => {
   return (
     <div className="max-w-3xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-6 my-4 min-h-[750px]">
       <h1 className="text-3xl font-bold mb-4">{meal.strMeal}</h1>
-      <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-80 object-cover rounded-lg mb-4" />
+      <Image src={meal.strMealThumb} alt={meal.strMeal} width={400} height={400} className="w-full h-80 object-cover rounded-lg mb-4" />
 
       <h2 className="text-2xl font-semibold mb-2">Ingredients</h2>
       <ul className="list-disc ml-6 mb-4">
