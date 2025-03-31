@@ -12,7 +12,8 @@ const Login = (  ) => {
         if (session) {
             router.push('/dashboard')
         } 
-    })
+    }, [session])  // Only run when `session` changes
+    
     return (
         <div className='container text-white py-14 mx-auto h-screen min-h-[700px]'>
             <div>
