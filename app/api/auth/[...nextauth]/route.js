@@ -21,33 +21,28 @@ export const authoptions = NextAuth({
     ],
     // secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async signIn({ user, account, profile, email, credentials }) {
-            if (account.provider == 'github' || account.provider === 'google') {
-                await connectDB()
-                // check if the user already exits in the database
-                const currentUser = await User.findOne({ email: user.email })
-                if (!currentUser) {
-                    // if the user does not exist, create a new user
-                    await User.create({
-                        name: profile.name || user.name || "Anonymous User",
-                        email: user.email,
-                        username: user.email.split("@")[0],
-                    })
-                }
-                return true
+        async signIn({ user, account }) {
+            await connectDB();
+            const existingUser = await User.findOne({ email: user.email }).lean();
+            if (!existingUser) {
+                await User.create({ name: user.name, email: user.email, username: user.email.split("@")[0] });
             }
+            return true;
         },
-
-        async session({ session, user, token }) {
-            await connectDB()
-            const dbUser = await User.findOne({ email: session.user.email });
-            if(dbUser){
+        async session({ session }) {
+            await connectDB();
+            const dbUser = await User.findOne({ email: session.user.email }).lean();
+            if (dbUser) {
                 session.user.name = dbUser.name;
                 session.user.username = dbUser.username;
             }
             return session;
         },
-    }
+    },
+    pages: {
+        signIn: "/auth/signin", // Custom sign-in page to reduce API calls
+    },
 });
 
-export { authoptions as GET, authoptions as POST }  
+export { authoptions as GET, authoptions as POST };
+export const config = { runtime: "edge" };  // Use Edge runtime for faster execution
